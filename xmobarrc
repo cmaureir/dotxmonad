@@ -9,6 +9,7 @@ Config {
                 --Run Swap [] 10,
                 Run Date "%a %b %_d %l:%M" "date" 10,
                 Run Battery ["-L","50","-H","75","--high","green","--normal","yellow", "--low", "red", "--template", "bat:<left>"] 100,
+                Run Brightness ["-t","<percent>"] 60,
                 --Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red"] 10,
                 --Run Network "wlan0" ["-L","0","-H","32","--normal","green","--high","red"] 10,
                 --Run MPD  ["-t", "<state>: <artist> - <track>"] 10,
@@ -16,6 +17,6 @@ Config {
                 ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{  %cpu% | %memory% | %battery% | <fc=#ee9a00>%date%</fc>               ",
+       , template = "%StdinReader% }{  %cpu% | %memory% | %battery% | bri:<fc=#ffff00>%bright%</fc>  | <fc=#ee9a00>%date%</fc>               ",
        }
        }
