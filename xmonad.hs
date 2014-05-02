@@ -30,8 +30,8 @@ main = do
 
 myKeysP = [ ("<XF86MonBrightnessUp>",   spawn "~/bin/brightness +")
           , ("<XF86MonBrightnessDown>", spawn "~/bin/brightness -")
-          , ("<XF86AudioLowerVolume>",  spawn "amixer set Master 2-")
-          , ("<XF86AudioRaiseVolume>",  spawn "amixer set Master 2+")
+          , ("<XF86AudioLowerVolume>",  spawn "amixer set Master 5%-")
+          , ("<XF86AudioRaiseVolume>",  spawn "amixer set Master 5%+")
           , ("<XF86AudioMute>",         spawn "amixer set Master toggle")
           , ("M-<F1>",                  spawn "urxvt")
           , ("M-<F2>",                  spawn "gmrun")
