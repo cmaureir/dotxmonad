@@ -1,15 +1,15 @@
 Section "InputClass"
-    Identifier "Keyboard Defaults"
+    Identifier      "Keyboard Defaults"
     MatchIsKeyboard "yes"
-    Option  "XkbLayout" "us"
-    Option  "XkbVariant" "altgr-intl"
+    Option          "XkbLayout"  "us"
+    Option          "XkbVariant" "altgr-intl"
 EndSection
 
 # cursor
 xsetroot -cursor_name left_ptr
 
 # Wallpaper
-feh --bg-scale ~/img/wallpaper-2589548.jpg &
+feh --bg-scale ~/img/shatterer.jpg &
 
 # Keyboard layout
 setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl &
