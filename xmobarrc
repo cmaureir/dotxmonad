@@ -4,6 +4,7 @@ Config {
        -- doesn't seem to do anything anymore (0.10, darcs)
 --       lowerOnStart = False,
        commands = [
+                Run Com "/home/cmaureir/bin/volume" [] "vol" 10,
                 Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10,
                 Run Memory ["-t","Mem: <usedratio>%"] 10,
                 --Run Swap [] 10,
@@ -17,6 +18,6 @@ Config {
                 ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{  %cpu% | %memory% | %battery% | bri:<fc=#ffff00>%bright%</fc>  | <fc=#ee9a00>%date%</fc>               ",
+       , template = "%StdinReader% }{ Vol: <fc=#ee9a00>%vol%</fc> | %cpu% | %memory% | %battery% | bri:<fc=#ffff00>%bright%</fc>  | <fc=#ee9a00>%date%</fc>               ",
        }
        }
