@@ -35,6 +35,7 @@ myKeysP = [ ("<XF86MonBrightnessUp>",   spawn "~/bin/brightness +")
           , ("<XF86AudioMute>",         spawn "amixer set Master toggle")
           , ("M-<F1>",                  spawn "urxvt")
           , ("M-<F2>",                  spawn "gmrun")
+          , ("M-<F3>",                  spawn "xterm")
           , ("M-<F4>",                  kill)
           , ("<Print>",                 spawn "scrot")
           ]
