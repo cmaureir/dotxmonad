@@ -1,16 +1,22 @@
 Config {
-    font = "xft:Monospace:pixelsize=11",
-    bgColor = "#000000",
-    lowerOnStart = True,
-    commands = [
-        Run Com "/home/cmaureir/bin/volume" [] "vol" 10,
-        Run MultiCpu ["-t", "Cpu: <total0> <total1> <total2> <total3>", "-L","3","-H","60","--normal","green","--high","red"] 10,
-        Run Memory ["-t","Mem: <usedratio>%"] 10,
-        Run Date "%a %b %_d %l:%M" "date" 10,
-        Run Com "/home/cmaureir/bin/cl-clock" [] "chile" 10,
-        Run StdinReader
-    ],
-    sepChar = "%",
-    alignSep = "}{",
-    template = "%StdinReader% }{ Vol: %vol% | %multicpu% | %memory% | <fc=#ee9a00>%date% - %chile%</fc>               ",
-    }
+       font = "xft:Monospace:pixelsize=11",
+       commands = [
+                Run Com "/home/cmaureir/bin/volume" [] "vol" 10,
+                Run MultiCpu ["-t", "Cpu: <total0> <total1> <total2> <total3>", "-L","3","-H","60","--normal","green","--high","red"] 10,
+                Run ThermalZone 0 ["-t","<temp>C"] 30,
+                Run Memory ["-t","Mem: <usedratio>%"] 10,
+                --Run Swap [] 10,
+                Run Date "%a %b %_d %l:%M" "date" 10,
+                Run Com "/home/cmaureir/bin/cl-clock" [] "chile" 10,
+                Run Battery ["-L","50","-H","75","--high","green","--normal","yellow", "--low", "red", "--template", "bat:<left>"] 100,
+                --Run Brightness ["-t","<percent>"] 60,
+                Run Com "/home/cmaureir/bin/brightness" [] "bright" 10,
+                --Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red"] 10,
+                --Run Network "wlan0" ["-L","0","-H","32","--normal","green","--high","red"] 10,
+                --Run MPD  ["-t", "<state>: <artist> - <track>"] 10,
+                Run StdinReader
+                ]
+       , sepChar = "%"
+       , alignSep = "}{" , template = "%StdinReader% }{ Vol: <fc=#ee9a00>%vol%</fc> | %multicpu% (<fc=#0000FF>%thermal0%</fc>)| %memory% | %battery% | bri:<fc=#ffff00>%bright%</fc>  | <fc=#ee9a00>%date%</fc> (%chile%)               ",
+       }
+}
