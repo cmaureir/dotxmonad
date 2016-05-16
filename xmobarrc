@@ -1,23 +1,16 @@
 Config {
-       font = "xft:Monospace:pixelsize=11",
-       -- used to make the bar appear correctly after Mod-q in older xmonad implementations (0.9.x)
-       -- doesn't seem to do anything anymore (0.10, darcs)
---       lowerOnStart = False,
-       commands = [
-                Run Com "/home/cmaureir/bin/volume" [] "vol" 10,
-                Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10,
-                Run Memory ["-t","Mem: <usedratio>%"] 10,
-                --Run Swap [] 10,
-                Run Date "%a %b %_d %l:%M" "date" 10,
-                Run Battery ["-L","50","-H","75","--high","green","--normal","yellow", "--low", "red", "--template", "bat:<left>"] 100,
-                Run Brightness ["-t","<percent>"] 60,
-                --Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red"] 10,
-                --Run Network "wlan0" ["-L","0","-H","32","--normal","green","--high","red"] 10,
-                --Run MPD  ["-t", "<state>: <artist> - <track>"] 10,
-                Run StdinReader
-                ]
-       , sepChar = "%"
-       , alignSep = "}{"
-       , template = "%StdinReader% }{ Vol: <fc=#ee9a00>%vol%</fc> | %cpu% | %memory% | %battery% | bri:<fc=#ffff00>%bright%</fc>  | <fc=#ee9a00>%date%</fc>               ",
-       }
-       }
+    font = "xft:Monospace:pixelsize=11",
+    bgColor = "#000000",
+    lowerOnStart = True,
+    commands = [
+        Run Com "/home/cmaureir/bin/volume" [] "vol" 10,
+        Run MultiCpu ["-t", "Cpu: <total0> <total1> <total2> <total3>", "-L","3","-H","60","--normal","green","--high","red"] 10,
+        Run Memory ["-t","Mem: <usedratio>%"] 10,
+        Run Date "%a %b %_d %l:%M" "date" 10,
+        Run Com "/home/cmaureir/bin/cl-clock" [] "chile" 10,
+        Run StdinReader
+    ],
+    sepChar = "%",
+    alignSep = "}{",
+    template = "%StdinReader% }{ Vol: %vol% | %multicpu% | %memory% | <fc=#ee9a00>%date% - %chile%</fc>               ",
+    }
