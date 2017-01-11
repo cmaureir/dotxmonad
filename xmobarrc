@@ -2,8 +2,17 @@ Config {
        font = "xft:Monospace:pixelsize=11",
        commands = [
                 Run Com "/home/cmaureir/bin/volume" [] "vol" 10,
-                Run MultiCpu ["-t", "Cpu: <total0> <total1> <total2> <total3>", "-L","3","-H","60","--normal","green","--high","red"] 10,
-                Run ThermalZone 0 ["-t","<temp>C"] 30,
+                Run MultiCpu [
+                                "-t", "Cpu: <total0> <total1> <total2> <total3>",
+                                "-L", "3",
+                                "-H", "60",
+                                "--normal", "green",
+                                "--high", "red"
+                              ] 10,
+                --Run ThermalZone 0 ["-t","<temp>C"] 30,
+                --Run ThermalZone 1 ["-t","<temp>C"] 30,
+                Run ThermalZone 0 ["-t", "<temp> C", "-L", "40", "-H", "79", "-h", "#ff0000", "-n", "#ffff00", "-l", "#00aa00"] 10,
+                Run ThermalZone 1 ["-t", "<temp> C", "-L", "40", "-H", "79", "-h", "#ff0000", "-n", "#ffff00", "-l", "#00aa00"] 10,
                 Run Memory ["-t","Mem: <usedratio>%"] 10,
                 --Run Swap [] 10,
                 Run Date "%a %b %_d %l:%M" "date" 10,
@@ -17,6 +26,6 @@ Config {
                 Run StdinReader
                 ]
        , sepChar = "%"
-       , alignSep = "}{" , template = "%StdinReader% }{ Vol: <fc=#ee9a00>%vol%</fc> | %multicpu% (<fc=#0000FF>%thermal0%</fc>)| %memory% | %battery% | bri:<fc=#ffff00>%bright%</fc>  | <fc=#ee9a00>%date%</fc> (%chile%)               ",
+       , alignSep = "}{" , template = "%StdinReader% }{ Vol: <fc=#ee9a00>%vol%</fc> | %multicpu% (<fc=#0000FF>%thermal0%</fc> <fc=#0000FF>%thermal1%</fc>)| %memory% | %battery% | bri:<fc=#ffff00>%bright%</fc>  | <fc=#ee9a00>%date%</fc> (%chile%)               ",
        }
 }
