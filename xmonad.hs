@@ -44,7 +44,7 @@ main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 myBar = "xmobar ~/.xmonad/xmobarrc"
 
 --myPP = xmobarPP {ppOutput = hPutStrLn xmproc, ppTitle = xmobarColor "green" "" . shorten 50 }
-myPP = xmobarPP { ppCurrent = xmobarColor "green" "" . wrap "<" ">" . shorten 68}
+myPP = xmobarPP { ppCurrent = xmobarColor "green" "" . wrap "[" "]" . shorten 68}
 
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)

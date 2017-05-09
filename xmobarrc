@@ -1,31 +1,64 @@
 Config {
-       font = "xft:Monospace:pixelsize=11",
-       commands = [
+       font = "xft:Fira Sans Regular:pixelsize=11"
+       , additionalFonts = []
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "black"
+       , fgColor = "grey"
+       , alpha = 255
+       , position = Top
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [
+                --Run ThermalZone 0 ["-t","<temp>C"] 30,
+                --Run ThermalZone 1 ["-t","<temp>C"] 30,
+                --Run Swap [] 10,
+                --Run Brightness ["-t","<percent>"] 60,
+                --Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red"] 10,
+                --Run Network "wlan0" ["-L","0","-H","32","--normal","green","--high","red"] 10,
+                --Run MPD  ["-t", "<state>: <artist> - <track>"] 10,
                 Run Com "/home/cmaureir/bin/volume" [] "vol" 10,
                 Run MultiCpu [
-                                "-t", "Cpu: <total0> <total1> <total2> <total3>",
+                                "-t", "C: <total0> <total1> <total2> <total3>",
                                 "-L", "3",
                                 "-H", "60",
                                 "--normal", "green",
                                 "--high", "red"
                               ] 10,
-                --Run ThermalZone 0 ["-t","<temp>C"] 30,
-                --Run ThermalZone 1 ["-t","<temp>C"] 30,
-                Run ThermalZone 0 ["-t", "<temp> C", "-L", "40", "-H", "79", "-h", "#ff0000", "-n", "#ffff00", "-l", "#00aa00"] 10,
-                Run ThermalZone 1 ["-t", "<temp> C", "-L", "40", "-H", "79", "-h", "#ff0000", "-n", "#ffff00", "-l", "#00aa00"] 10,
-                Run Memory ["-t","Mem: <usedratio>%"] 10,
-                --Run Swap [] 10,
-                Run Date "%a %b %_d %l:%M" "date" 10,
+                Run ThermalZone 0 [
+                                    "-t", "<temp> C", "-L", "40", "-H", "79",
+                                    "-h", "#ff0000",
+                                    "-n", "#ffff00",
+                                    "-l", "#00aa00"
+                                  ] 10,
+                Run ThermalZone 1 [
+                                    "-t", "<temp> C", "-L", "40", "-H", "79",
+                                    "-h", "#ff0000",
+                                    "-n", "#ffff00",
+                                    "-l", "#00aa00"
+                                   ] 10,
+                Run Memory ["-t","<usedratio>%"] 10,
+                Run Date "%a %b %_d %k:%M" "date" 10,
                 Run Com "/home/cmaureir/bin/cl-clock" [] "chile" 10,
-                Run Battery ["-L","50","-H","75","--high","green","--normal","yellow", "--low", "red", "--template", "bat:<left>"] 100,
-                --Run Brightness ["-t","<percent>"] 60,
+                Run Com "/home/cmaureir/bin/cn-clock" [] "china" 10,
+                Run Com "/home/cmaureir/bin/pst-clock" [] "pst" 10,
+                Run Battery [
+                    "-L","50","-H","75","--high","green",
+                    "--normal","yellow", "--low", "red",
+                    "--template", "<left>%"
+                    ] 100,
                 Run Com "/home/cmaureir/bin/brightness" [] "bright" 10,
-                --Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red"] 10,
-                --Run Network "wlan0" ["-L","0","-H","32","--normal","green","--high","red"] 10,
-                --Run MPD  ["-t", "<state>: <artist> - <track>"] 10,
                 Run StdinReader
                 ]
        , sepChar = "%"
-       , alignSep = "}{" , template = "%StdinReader% }{ Vol: <fc=#ee9a00>%vol%</fc> | %multicpu% (<fc=#0000FF>%thermal0%</fc> <fc=#0000FF>%thermal1%</fc>)| %memory% | %battery% | bri:<fc=#ffff00>%bright%</fc>  | <fc=#ee9a00>%date%</fc> (%chile%)               ",
-       }
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ V: <fc=#ee9a00>%vol%</fc> | %multicpu% (<fc=#0000FF>%thermal0%</fc> <fc=#0000FF>%thermal1%</fc>)| M: %memory% | B: <fc=#ffff00>%bright%</fc> | %date% <fc=#FF6A0D>DE</fc> | %chile% <fc=#0000FF>CL</fc> | %china% <fc=#0000FF>CN</fc> | %pst% <fc=#0000FF>PS</fc> | %battery% |                           "
+       --, template = "%StdinReader% }{ <fc=#ee9a00>%vol%</fc> <icon=xpm/vol.xpm/> | %multicpu% (<fc=#0000FF>%thermal0%</fc> <fc=#0000FF>%thermal1%</fc>)| %memory% | %battery% | <fc=#ffff00>%bright%</fc> <icon=xpm/bri.xpm/> | %date% <icon=xpm/de.xpm/> |%chile% <icon=xpm/cl.xpm/> | %china% <icon=xpm/cn.xpm/> | %pst% <icon=xpm/us.xpm/>                            "
 }
