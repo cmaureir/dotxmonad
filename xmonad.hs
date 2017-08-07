@@ -18,9 +18,11 @@ import XMonad.Layout.Spacing
 myConfig = defaultConfig
         { manageHook = ( isFullscreen --> doFullFloat ) <+> manageDocks <+> manageHook defaultConfig
         , layoutHook = smartBorders (avoidStruts  $  layoutHook defaultConfig)
-        , borderWidth = 2
+        , borderWidth = 1
         , modMask = mod4Mask
         , terminal = "terminator"
+        , focusedBorderColor = "#ff4747"
+        , normalBorderColor = "#DDDDDD"
         } `additionalKeysP` myKeysP
 
 myKeysP = [ ("<XF86MonBrightnessUp>",   spawn "~/bin/brightness +")
@@ -44,7 +46,7 @@ main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 myBar = "xmobar ~/.xmonad/xmobarrc"
 
 --myPP = xmobarPP {ppOutput = hPutStrLn xmproc, ppTitle = xmobarColor "green" "" . shorten 50 }
-myPP = xmobarPP { ppCurrent = xmobarColor "green" "" . wrap "[" "]" . shorten 68}
+myPP = xmobarPP { ppCurrent = xmobarColor "#dc322f" "" . wrap "[" "]" . shorten 68, ppTitle = xmobarColor "#dc322f" ""}
 
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
