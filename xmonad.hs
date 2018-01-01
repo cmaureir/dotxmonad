@@ -1,29 +1,9 @@
 import XMonad
-import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
 import XMonad.Util.EZConfig(additionalKeysP)
 import XMonad.Layout.NoBorders(smartBorders)
-import XMonad.Util.Run(spawnPipe)
 import XMonad.Hooks.ManageHelpers
-import XMonad.Layout.Gaps
-import Graphics.X11.ExtraTypes.XF86
-import System.IO
-import XMonad.Layout.IM as IM
-import XMonad.Layout.Grid
-import Data.Ratio ((%))
-import XMonad.Layout.Spacing
-
---        manageHook = manageDocks <+> manageHook defaultConfig,
---        layoutHook = avoidStruts $ layoutHook defaultConfig,
-myConfig = defaultConfig
-        { manageHook = ( isFullscreen --> doFullFloat ) <+> manageDocks <+> manageHook defaultConfig
-        , layoutHook = smartBorders (avoidStruts  $  layoutHook defaultConfig)
-        , borderWidth = 1
-        , modMask = mod4Mask
-        , terminal = "terminator"
-        , focusedBorderColor = "#ff4747"
-        , normalBorderColor = "#DDDDDD"
-        } `additionalKeysP` myKeysP
 
 myKeysP = [ ("<XF86MonBrightnessUp>",   spawn "~/bin/brightness +")
           , ("<XF86MonBrightnessDown>", spawn "~/bin/brightness -")
@@ -37,16 +17,26 @@ myKeysP = [ ("<XF86MonBrightnessUp>",   spawn "~/bin/brightness +")
           , ("<Print>",                 spawn "scrot")
           ]
 
-
---main = xmonad =<< myBar myPP toggleStrutsKey myConfig
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
-
-
---myBar = xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobarrc"
+-- Command to launch the bar.
 myBar = "xmobar ~/.xmonad/xmobarrc"
 
---myPP = xmobarPP {ppOutput = hPutStrLn xmproc, ppTitle = xmobarColor "green" "" . shorten 50 }
-myPP = xmobarPP { ppCurrent = xmobarColor "#dc322f" "" . wrap "[" "]" . shorten 68, ppTitle = xmobarColor "#dc322f" ""}
+-- Custom PP, configure it as you like. It determines what is being written to the bar.
+myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
 
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+
+-- Main configuration, override the defaults to your liking.
+myConfig = defaultConfig
+        { manageHook = ( isFullscreen --> doFullFloat ) <+> manageDocks <+> manageHook defaultConfig
+        , layoutHook = smartBorders (avoidStruts  $  layoutHook defaultConfig)
+        , borderWidth = 1
+        , terminal = "terminator"
+        , focusedBorderColor = "#ff4747"
+        , normalBorderColor = "#DDDDDD"
+        , modMask = mod4Mask     -- Rebind Mod to the Windows key
+        } `additionalKeysP` myKeysP
+
+-- The main function.
+main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
+
