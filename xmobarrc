@@ -1,10 +1,10 @@
 Config {
-       font = "xft:Fira Sans Regular:pixelsize=11"
+       font = "xft:Inconsolata:size=11, Noto Emoji:size=11"
        , additionalFonts = []
        , bgColor = "#2d2d2d"
-       , fgColor = "#cccccc"
+       , fgColor = "#ffffff"
        , alpha = 255
-       , position = Top
+       , position = Static {xpos = 0, ypos = 0, width = 1920, height = 18}
        , textOffset = -1
        , iconOffset = -1
        , lowerOnStart = True
@@ -21,36 +21,24 @@ Config {
                 --Run Network "enp0s25" ["-L","0","-H","32","--normal","#859900","--high","#dc322f"] 10,
                 --Run Network "wlp3s0" ["-L","0","-H","32","--normal","#859900","--high","#dc322f"] 10,
                 --Run MPD  ["-t", "<state>: <artist> - <track>"] 10,
-                Run Com "/home/crmaurei/bin/volume" [] "vol" 10,
+                Run Com "/home/cmaureir/bin/volume" [] "vol" 10,
                 Run MultiCpu [
-                                "-t", "<fc=#FFFFFF>Cores:</fc> <total0> <total1> <total2> <total3> <total4> <total5> <total6> <total7>",
+                                "-t", "<total0> <total1> <total2> <total3> <total4> <total5> <total6> <total7> <total8> <total9> <total10> <total11>",
                                 "-L", "8",
                                 "-H", "60",
                                 "--normal", "#859900",
                                 "--high", "#dc322f"
                               ] 10,
-                Run ThermalZone 0 [
-                                    "-t", "<temp> C", "-L", "40", "-H", "79",
-                                    "-h", "#dc322f",
-                                    "-n", "#b58900",
-                                    "-l", "#2aa198"
-                                  ] 10,
+                Run Com "/home/cmaureir/bin/cputemp" [] "cputemp" 10,
                 Run Memory ["-t","<usedratio>%"] 10,
-                Run Date "%k:%M  %a %b %_d" "date" 10,
-                Run Com "/home/crmaurei/bin/cl-clock" [] "chile" 10,
-                Run Com "/home/crmaurei/bin/cn-clock" [] "china" 10,
-                Run Com "/home/crmaurei/bin/pst-clock" [] "pst" 10,
-                -- Run Battery [
-                --     "-L","50","-H","75","--high","#859900",
-                --     "--normal","yellow", "--low", "#dc322f",
-                --     "--template", "<left>%"
-                --     ] 100,
-                -- Run Com "/home/crmaurei/bin/brightness" [] "bright" 10,
+                Run Date "🍺 %a %b %_d %0k:%M" "date" 10,
+                Run Com "/home/cmaureir/bin/cl-clock" [] "chile" 10,
+                Run Com "/home/cmaureir/bin/pst-clock" [] "pst" 10,
+                Run Com "/home/cmaureir/bin/est-clock" [] "est" 10,
                 Run StdinReader
                 ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %multicpu% (<fc=#0000FF>%thermal0%</fc>) | Vol: <fc=#ee9a00>%vol%</fc> | Mem: %memory% | <fc=#2aa198>DE</fc> <fc=#FFFFFF>%date%</fc> | <fc=#2aa198>CL</fc> %chile% | <fc=#2aa198>CN</fc> %china% | <fc=#2aa198>PS</fc> %pst% |                          "
+       , template = "<icon=/home/cmaureir/.xmonad/logo.xpm/> %StdinReader% }{📈 %multicpu% (<fc=#778eca>%cputemp%°C</fc>) 🔈<fc=#ee9a00>%vol%</fc> 🐏%memory% <fc=#FFFFFF>%date%</fc> %chile% %pst% %est%                "
 
-       --, template = "%StdinReader% }{ <fc=#ee9a00>%vol%</fc> <icon=xpm/vol.xpm/> | %multicpu% (<fc=#0000FF>%thermal0%</fc> <fc=#0000FF>%thermal1%</fc>)| %memory% | %battery% | <fc=#ffff00>%bright%</fc> <icon=xpm/bri.xpm/> | %date% <icon=xpm/de.xpm/> |%chile% <icon=xpm/cl.xpm/> | %china% <icon=xpm/cn.xpm/> | %pst% <icon=xpm/us.xpm/>                            "
 }
