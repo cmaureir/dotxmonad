@@ -12,7 +12,7 @@ import XMonad.Layout.Tabbed
 import XMonad.StackSet (RationalRect (..), currentTag)
 
 myKeysP = [
-    , ("<XF86AudioLowerVolume>",  spawn "~/bin/volume -")
+      ("<XF86AudioLowerVolume>",  spawn "~/bin/volume -")
     , ("<XF86AudioRaiseVolume>",  spawn "~/bin/volume +")
     , ("<XF86AudioMute>",         spawn "~/bin/volume m")
     , ("<XF86AudioNext>",         spawn "~/bin/player next")
@@ -31,20 +31,10 @@ myKeysP = [
     , ("<Print>",                 spawn "scrot")
     ]
 
-myWorkspaces = [
-      "1"
-    , "2"
-    , "3"
-    , "4"
-    , "5"
-    , "6"
-    , "7"
-    , "8"
-    , "9"
-    ]
+myWorkspaces = map show [1..9]
 
 -- Command to launch the bar.
-myBar = "xmobar ~/.xmonad/xmobarrc"
+myBar = "xmobar -x 1 ~/.xmonad/xmobarrc"
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
 myPP = xmobarPP {
